@@ -16,7 +16,8 @@ $(function () {
 			popup: 'animate__animated animate__fadeOutUp'
 		},
 		allowOutsideClick: false,
-		confirmButtonText:"Open Page"
+		confirmButtonText:"Open Page",
+		confirmButtonColor:"#c867f0"
 	}).then((result) => {
 		if (result.isConfirmed) {
 			$('#mainDiv').show();
