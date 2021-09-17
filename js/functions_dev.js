@@ -2,29 +2,80 @@
 var $window = $(window), gardenCtx, gardenCanvas, $garden, garden;
 var clientWidth = $(window).width();
 var clientHeight = $(window).height();
-
+var offsetX;
+var offsetY;
 $(function () {
     // setup garden
-	$loveHeart = $("#loveHeart");
-	var offsetX = $loveHeart.width() / 2;
-	var offsetY = $loveHeart.height() / 2 - 55;
-    $garden = $("#garden");
-    gardenCanvas = $garden[0];
-	gardenCanvas.width = $("#loveHeart").width();
-    gardenCanvas.height = $("#loveHeart").height()
-    gardenCtx = gardenCanvas.getContext("2d");
-    gardenCtx.globalCompositeOperation = "lighter";
-    garden = new Garden(gardenCtx, gardenCanvas);
-	
-	$("#content").css("width", $loveHeart.width() + $("#code").width());
-	$("#content").css("height", Math.max($loveHeart.height(), $("#code").height()));
-	$("#content").css("margin-top", Math.max(($window.height() - $("#content").height()) / 2, 10));
-	$("#content").css("margin-left", Math.max(($window.width() - $("#content").width()) / 2, 10));
+	Swal.fire({
+		title: 'Selamat ulang tahun Nadila Dyah Lestari !',
+		text:"klik tombol dibawah ini ya",
+		showClass: {
+			popup: 'animate__animated animate__fadeInDown'
+		},
+		hideClass: {
+			popup: 'animate__animated animate__fadeOutUp'
+		},
+		allowOutsideClick: false,
+		confirmButtonText:"Open Page"
+	}).then((result) => {
+		if (result.isConfirmed) {
+			$('#mainDiv').show();
+			var musik 	= document.getElementById('musik');
+			musik.play()
+			$loveHeart = $("#loveHeart");
+			offsetX = $loveHeart.width() / 2;
+			offsetY = $loveHeart.height() / 2 - 55;
+			$garden = $("#garden");
+			gardenCanvas = $garden[0];
+			gardenCanvas.width = $("#loveHeart").width();
+			gardenCanvas.height = $("#loveHeart").height()
+			gardenCtx = gardenCanvas.getContext("2d");
+			gardenCtx.globalCompositeOperation = "lighter";
+			garden = new Garden(gardenCtx, gardenCanvas);
+			
+			$("#content").css("width", $loveHeart.width() + $("#code").width());
+			$("#content").css("height", Math.max($loveHeart.height(), $("#code").height()));
+			$("#content").css("margin-top", Math.max(($window.height() - $("#content").height()) / 2, 10));
+			$("#content").css("margin-left", Math.max(($window.width() - $("#content").width()) / 2, 10));
 
-    // renderLoop
-    setInterval(function () {
-        garden.render();
-    }, Garden.options.growSpeed);
+			// renderLoop
+			setInterval(function () {
+				garden.render();
+			}, Garden.options.growSpeed);
+			offsetX = $("#loveHeart").width() / 2;
+			offsetY = $("#loveHeart").height() / 2 - 55;
+			var together = new Date();
+			together.setFullYear(1997,7, 9);
+			together.setHours(8);
+			together.setMinutes(0);
+			together.setSeconds(0);
+			together.setMilliseconds(0);
+			
+			if (!document.createElement('canvas').getContext) {
+				var msg = document.createElement("div");
+				msg.id = "errorMsg";
+				msg.innerHTML = "Your browser doesn't support HTML5!<br/>Recommend use Chrome 14+/IE 9+/Firefox 7+/Safari 4+"; 
+				document.body.appendChild(msg);
+				$("#code").css("display", "none")
+				$("#copyright").css("position", "absolute");
+				$("#copyright").css("bottom", "10px");
+				document.execCommand("stop");
+			} else {
+				setTimeout(function () {
+					startHeartAnimation();
+				}, 5000);
+
+				timeElapse(together);
+				setInterval(function () {
+					timeElapse(together);
+				}, 500);
+
+				adjustCodePosition();
+				$("#code").typewriter();
+			}
+		}
+	})
+	
 });
 
 $(window).resize(function() {
@@ -125,7 +176,7 @@ function showMessages() {
 function adjustWordsPosition() {
 	$('#words').css("position", "absolute");
 	$('#words').css("top", $("#garden").position().top + 275);
-	$('#words').css("left", $("#garden").position().left + 140);
+	$('#words').css("left", $("#garden").position().left + 120);
 }
 
 function adjustCodePosition() {
