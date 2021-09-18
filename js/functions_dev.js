@@ -7,7 +7,7 @@ var offsetY;
 $(function () {
     // setup garden
 	Swal.fire({
-		title: 'Selamat ulang tahun Nadila Dyah Lestari !',
+		title: 'Selamat ulang tahun<br>Nadila Dyah Lestari !',
 		text:"klik tombol dibawah ini ya",
 		showClass: {
 			popup: 'animate__animated animate__fadeInDown'
@@ -46,7 +46,7 @@ $(function () {
 			offsetX = $("#loveHeart").width() / 2;
 			offsetY = $("#loveHeart").height() / 2 - 55;
 			var together = new Date();
-			together.setFullYear(1997,7, 9);
+			together.setFullYear(2001,9, 21);
 			together.setHours(8);
 			together.setMinutes(0);
 			together.setSeconds(0);
